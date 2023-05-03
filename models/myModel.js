@@ -3,25 +3,25 @@ const mongoose = require("mongoose");
 
 //Creación del Schema Post
 const postSchema = new mongoose.Schema({
-    title: {
+    nombre: {
         type: String,
-        required: [true, "Un post debe tener un título"],
+        required: [true, "Un post debe tener un nombre"],
     },
-    description: {
+    apellido: {
         type: String,
-        required: [true, "Un post debe tener una descripción"],
+        required: [true, "Un post debe tener un apellido"],
     },
-    date: {
-        type: Date,
-        required: [true, "Un post debe tener una fecha"],
-    },
-    technologies: {
-        type: [String],
-        required: [true, "Un post debe contar con tecnologías"],
-    },
+    edad: {
+        type: Number,
+        required: [true, "Un post debe tener un año de edad"],
+    }
 });
 
 //Creación del modelo Post
-const Post = mongoose.model("Post", postSchema);
+const Post = mongoose.model('Post', postSchema);
+const name = new Post({ nombre: 'hola', edad: 29 ,apellido: 'suarez'});
 
 module.exports = Post;
+console.log(name.nombre,name.apellido,name.edad);
+
+ 

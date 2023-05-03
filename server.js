@@ -1,23 +1,15 @@
-const mongoose = require("mongoose");
 const app = require("./app");
-const dotenv = require("dotenv");
+const mongoose = require('mongoose');
 
-//Carga de variables de entorno
-// dotenv.config({ path: "./config.env" });
-// const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DATABASE_PASSWORD);
+mongoose.connect('mongodb+srv://labanda:labanda123@servidor.iektvtc.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log('Conexión a MongoDB Atlas exitosa');
+    app.listen(3006, () => {
+        console.log('Servidor corriendo en el puerto 3006');
+    });
+}).catch(err => console.log('Error al conectar a MongoDB Atlas:', err.message));
 
-//Conexión al cloud de Mongodb Atlas
-// mongoose
-//     .connect(DB, {
-//         useNewUrlParser: true,
-//     })
-//     .then((con) => {
-//         //console.log(con.connections);
-//         console.log("Connected to database");
-//     });
-
-const port = 3001;
-//Corremos el servidor en el puerto seleccionado
-app.listen(port, () => {
-    console.log(`Servidor corriendo en el puerto ${port} correctamente`);
-});
+// Exporta la instancia de mongoose después de la conexión
+module.exports = mongoose;
