@@ -1,24 +1,21 @@
-/*const models = require("../models/myModel"); // Importa el modelo de la colección
 
-exports.consulta = (req, res) => {
-    models.find({}, (err, resultados) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send("Error en la consulta");
-        }
-
-        res.status(200).json(resultados);
-    });
-};*/
-const mongoose = require('mongoose');
-
-const kittySchema = new mongoose.Schema({
-    name: String,
-    edad: Number
+const {default : mongoose} = require('mongoose');
+const models = require("../models/myModel")
+const newmodel = new models({
+    nombre: "joaquin",
+    edad: "17"
   });
 
-const Kitten = mongoose.model('Kitten', kittySchema);
+newmodel.save()
+.then(() => {
+    console.log("documento se guardo");
+    mongoose.connection.close();
+})
+.catch ((error) =>{
+    console.log(error);
+    mongoose.connection.close();
+})
 
-const silence = new Kitten({ name: 'Silence', edad: 29 });
-console.log(silence.name,silence.edad); // 'Silence'
- 
+exports.inicio = (req,res) => {
+    res.status(200).render("index");
+}
