@@ -36,6 +36,17 @@ models
     mongoose.connection.close();
   });
 
+  models.findByIdAndUpdate(('646254a7e30fce64a72378a7'),
+    { nombre: 'Nuevo nombre', edad: '20' },
+    { new: true } // Opcional: devuelve el documento modificado en lugar del original
+  )
+  .then((documentoModificado) => {
+    console.log('646254a7e30fce64a72378a7', documentoModificado);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
 exports.inicio = (req, res) => {
   res.status(200).render('index');
 };
